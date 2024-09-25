@@ -9,7 +9,7 @@ function Inputs({setNotes}) {
       title,
       body,
       id: Date.now(),
-      isfinished: false,
+      isFinished: false,
     };
     setTitle("");
     setBody("");

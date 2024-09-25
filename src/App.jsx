@@ -12,6 +12,16 @@ export default function App() {
     localStorage.setItem("myNotes", JSON.stringify(notes));
   }, [notes]);
 
+  const removeNote = (id) => {
+    setNotes(notes.filter(item => item.id !== id));
+  };
+
+  const markAsFinished = (id) => {
+    setNotes(notes.map(item => 
+      item.id === id ? { ...item, isFinished: !item.isFinished } : item
+    ));
+  };
+  
 
   console.log(notes);
   return (
@@ -20,8 +30,8 @@ export default function App() {
       <div className="flex gap-4">
         <Inputs setNotes={setNotes} />
         <div className="cardsContainer w-2/3 h-screen flex justify-around gap-5 flex-wrap hide-scroll-bar overflow-y-scroll">
-          {notes.map(({ title, body, id }) => (
-            <NoteCard title={title} body={body} id={id} setNotes={setNotes} />
+          {notes.map(({ title, body, id , isFinished }) => (
+            <NoteCard title={title} isFinished={isFinished} body={body} id={id} remove={()=>removeNote(id)} done={()=>markAsFinished(id)} key={id} />
           ))}
         </div>
       </div>
