@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function Inputs({setNots}) {
+function Inputs({setNotes}) {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const submitHandeler = (e) => {
@@ -11,20 +11,23 @@ function Inputs({setNots}) {
       id: Date.now(),
       isfinished: false,
     };
-    setNots((haveNots) => [...haveNots, newNote]);
     setTitle("");
     setBody("");
+    if (newNote) {
+      setNotes((haveNots)=>[...haveNots, newNote]);
+      e.target.reset();
+    }
   };
 
   return (
-    <div className=" w-1/3 h-full border-2 border-black">
+    <div className=" w-1/3 h-screen border-4 border-[#33322E] boxShadow rounded-3xl">
       <form
         action=""
-        className="flex flex-col gap-4 justify-between p-4"
+        className="flex flex-col gap-4 justify-between p-5 "
         onSubmit={submitHandeler}
       >
         <input
-          className=" border-2 border-black w-full"
+          className=" border-2 border-[#33322E] w-full p-2 boxShadow rounded-3xl"
           type="text"
           id="title"
           placeholder="Enter your title"
@@ -32,7 +35,7 @@ function Inputs({setNots}) {
           value={title}
         />
         <input
-          className=" border-2 border-black"
+          className=" border-2 border-[#33322E] p-2 boxShadow rounded-3xl"
           type="text"
           id="note"
           placeholder="Enter your note"
@@ -41,7 +44,7 @@ function Inputs({setNots}) {
         />
         <input
           type="submit"
-          className="border-2 border-black transition-colors hover:bg-black hover:text-white"
+          className="border-2 border-[#33322E] transition-colors hover:bg-black hover:text-white p-2 boxShadow rounded-3xl"
         />
       </form>
     </div>
